@@ -15,7 +15,7 @@ D3 was tested on Python v3.9.1 (macOS and DeepinOS), with the following basic re
  * Matplotlib (tested on v3.3.4)
  
 # Typical workflow
-**D3** is a user-friendly scripts, which takes 3dg file and an index file as input, and output bed-like file storing the DNA density and DisTP. 
+**D3** is a user-friendly scripts, which takes [3dg files ](https://github.com/xjtu-omics/D3/wiki/File-Format#3dg-file) and [an index file](https://github.com/xjtu-omics/D3/wiki/File-Format#index-file) as input, and outputs [bed-like file](https://github.com/xjtu-omics/D3/wiki/File-Format#den_dtptxt) storing the DNA density and DisTP. 
 
 Besides, we provided here the scripts for computing the enrichments of genetic markers, including the construction of density-DisTP matrix and calculation of enrichments. In order to achieve it, users should apply the genetic markers data **of same reference genome**.
 ## Compute DNA Density and DisTP
