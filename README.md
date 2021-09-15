@@ -14,10 +14,8 @@ D3 was tested on Python v3.9.1 (macOS and DeepinOS), with the following basic re
  * Seaborn (tested on v0.11.1)
  * Matplotlib (tested on v3.3.4)
  
-# Overflow of D3
- 
-#  Tipycal Workflow
-Below is a typical workflow using the test data.
+# Typical workflow
+D3 takes indexed 3dg file as input, and output bed-like file storing the DNA density and DisTP. Besides, we provided here the scripts for computing the enrichments of genetic markers.
 ## Compute DNA Density and DisTP
 D3.py D3 and D3.py D3s compute the DNA density and DisTP. The resulted DNA and DisTP are stored in bed-like format file.
   ```
