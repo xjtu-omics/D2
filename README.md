@@ -19,7 +19,7 @@ D3 was tested on Python v3.9.1 (macOS and DeepinOS), with the following basic re
 
 Besides, we provided here the scripts for computing the **enrichments of genetic markers**, including the construction of density-DisTP matrix and calculation of enrichments. In order to achieve it, users should apply the [genetic markers data](https://github.com/xjtu-omics/D3/wiki/File-Format#genetic-marker-file) **of same reference genome**.
 
-Below is a typicle workflow using the **test_data**.
+Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-omics/D3/tree/main/test_data).
 ## Compute DNA Density and DisTP
 **D3.py D3** and **D3.py D3s** compute the DNA density and DisTP. The resulted DNA and DisTP are stored in bed-like format file.
   ```
