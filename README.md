@@ -1,5 +1,5 @@
 # D3: Compute DNA Density and Distance to periphery.
-D3 is a fast and accurate tool for computing **D**NA **D**ensity and **D**istance to periphrery (DisTP). In our paper, we show that the DNA density and DisTP are highly correlated with nuclear activities. 
+D3 is a fast and accurate tool for computing **D**NA **D**ensity and **D**istance to periphrery (DisTP). In our paper, we show that the DNA density and DisTP are highly correlated with nuclear activities. For detailed tutorial, please visit [wiki](https://github.com/xjtu-omics/D3/wiki).
 
 paper.
 
@@ -15,9 +15,9 @@ D3 was tested on Python v3.9.1 (macOS and DeepinOS), with the following basic re
  * Matplotlib (tested on v3.3.4)
  
 # Typical workflow
-**D3** is a user-friendly scripts, which takes [3dg files ](https://github.com/xjtu-omics/D3/wiki/File-Format#3dg-file) and [an index file](https://github.com/xjtu-omics/D3/wiki/File-Format#index-file) as input, and outputs [bed-like file](https://github.com/xjtu-omics/D3/wiki/File-Format#den_dtptxt) storing the DNA density and DisTP. 
+**D3** is a user-friendly scripts, which takes [3dg files](https://github.com/xjtu-omics/D3/wiki/File-Format#3dg-file) and [an index file](https://github.com/xjtu-omics/D3/wiki/File-Format#index-file) as input, and outputs [bed-like file](https://github.com/xjtu-omics/D3/wiki/File-Format#den_dtp) storing the DNA density and DisTP. 
 
-Besides, we provided here the scripts for computing the **enrichments of genetic markers**, including the construction of density-DisTP matrix and calculation of enrichments. In order to achieve it, users should apply the [genetic markers data](https://github.com/xjtu-omics/D3/wiki/File-Format#genetic-marker-file) **of same reference genome**.
+Besides, we provided here the scripts for computing the **enrichments of genetic markers**, including the construction of density-DisTP matrix and calculation of enrichments. In order to achieve it, users should apply the [genetic markers data](https://github.com/xjtu-omics/D3/wiki/File-Format#marker-file) **of same reference genome**.
 
 Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-omics/D3/tree/main/test_data).
 ## Compute DNA Density and DisTP
