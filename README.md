@@ -33,7 +33,7 @@ Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-om
 
 **D2.py map** puts the bins on density-DisTP matrix, and stores the probability of genomic bins appearing at matrix bins (states).
 
-**D2.py ave** computes the average and standard deviation (sd) of density and DisTP.
+**D2.py ave** computes the mean and standard deviation (SD) of density and DisTP.
   ```
   python D2.py sta test_result/den_dtp/den_dtp test_data/hg19_diplo_20k.window.bed test_result/test_map_sta
   python D2.py map test_result/den_dtp/den_dtp test_data/hg19_diplo_20k.window.bed test_result/test_map
