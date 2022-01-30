@@ -23,10 +23,10 @@ Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-om
 ## Compute DNA Density and DisTP
 **D2.py D2** and **D2.py D2s** compute the DNA density and DisTP. The resulted DNA and DisTP are stored in bed-like format file.
   ```
-  cd PATH/WHERE/D2/AT
-  mkdir -p test_result/den_dtp
+  cd PATH/WHERE/D2/
+  mkdir -p test_data/results
   
-  python D3.py D3s test_data/dg_files test_data/hg19_diplo_20k.window.bed test_result/den_dtp
+  python D2.py D2s ./test_data/dg_files/ ./test_data/hg19_diplo_20k.window.bed ./test_data/results/
   ```
 ## Construct Density-DisTP Matrix
 **D2.py sta** gives the density and DisTP ranges, and a scatter plot as below.
@@ -35,9 +35,9 @@ Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-om
 
 **D2.py ave** computes the mean and standard deviation (SD) of density and DisTP.
   ```
-  python D2.py sta test_result/den_dtp/den_dtp test_data/hg19_diplo_20k.window.bed test_result/test_map_sta
-  python D2.py map test_result/den_dtp/den_dtp test_data/hg19_diplo_20k.window.bed test_result/test_map
-  python D2.py ave test_map.txt test_ave.txt
+  python D2.py sta ./test_data/results/den_dtp/ ./test_data/hg19_diplo_20k.window.bed ./test_data/results/den_dtp_scatter.pdf
+  python D2.py map ./test_data/results/den_dtp/ ./test_data/hg19_diplo_20k.window.bed ./test_data/gm12878_histmap.txt
+  python D2.py ave ./test_data/results/gm12878_histmap.txt ./test_data/results/gm12878_ave.txt
   ```
  ![test_map_sta](https://user-images.githubusercontent.com/37327473/133371032-8a9061b8-c91f-4b9b-a143-a850fcafa32f.png)
 
@@ -47,9 +47,10 @@ Below is a typicle workflow using the [**test_data**](https://github.com/xjtu-om
 **D2.py hiera** ranks the matrix bins (states) by hierarchy cluster.
 ```
 python D2.py marks test_data/marks/ test_data/hg19_diplo_20k.window.bed test_mark.mark.txt
-mkdir mark_enrich
-python D2.py enrich test_map.txt test_mark.mark.txt mark_enrich/gm12878
-python D2.py hiera test_map.txt test_mark.mark.txt test_hiera
+mkdir test_data/results/enrich_pats
+python D2.py enrich ./test_data/results/gm12878_histmap.txt ./test_data/results/gm12878_value_idx.txt ./test_data/results/enrich_pats/gm12878
+mkdir test_data/results/hiera
+python D2.py hiera ./test_data/results/gm12878_histmap.txt ./test_data/results/gm12878_value_idx.txt ./test_data/results/hiera/gm12878
 ```
 Markers Enrichments Results:
 [gm12878_1-Active-Promoter_histplot.pdf](https://github.com/cyz0315/D2/files/7166776/gm12878_1-Active-Promoter_histplot.pdf)
@@ -62,6 +63,9 @@ Hierarchy cluster Results:
 ## Gene Enrichment & activation index
 **D2.py gene** computed the fold changes of selected genomic regions (e.g., active genes) on D2 plot.    
 **D2.py act** computed the activation index.
+```
+python D2.py act ./test_data/results/gm12878_histmap.txt ./test_data/results/gm12878_act_index.txt
+```
 
 # License
 D2 is free for non-commercial use by academic, government, and non-profit/not-for-profit institutions. A commercial version of the software is available and licensed through Xi’an Jiaotong University. For more information, please contact with Yizhuo che (cyz0315@stu.xjtu.edu.cn) or Kai Ye (kaiye@xjtu.edu.cn).
