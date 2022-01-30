@@ -13,7 +13,7 @@ def index_mark(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 mark <mark_file> <index_file> <out_file>\n")
+        sys.stderr.write("Usage: D2 mark <mark_file> <index_file> <out_file>\n")
         # sys.stderr.write("Options:\n")
         # sys.stderr.write("  -f STR         Figure output. default: None.\n")
         return 1
@@ -51,7 +51,7 @@ def index_marks(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 marks <mark_dir> <index_file> <out_file>\n")
+        sys.stderr.write("Usage: D2 marks <mark_dir> <index_file> <out_file>\n")
         # sys.stderr.write("Options:\n")
         # sys.stderr.write("  -f STR         Figure output. default: None.\n")
         return 1

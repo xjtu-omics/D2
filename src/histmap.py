@@ -94,7 +94,7 @@ def draw_hist(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 sta <den_dtp_dir> <index_file> <out_file>\n")
+        sys.stderr.write("Usage: D2 sta <den_dtp_dir> <index_file> <out_file>\n")
         return 1
     # for o, a in opts:
     #     if o == "-d":
@@ -112,18 +112,18 @@ def to_histmap(argv):
     den_min, den_max = 1, 3.2
     dtp_min, dtp_max = 1.21, 16
     try:
-        opts, args = getopt.getopt(argv[1:], "i:")
+        opts, args = getopt.getopt(argv[1:], "n:ei:ea:ti:ta:")
     except getopt.GetoptError as err:
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 map [options] <den_dtp_dir> <index_file> <out_file>\n")
+        sys.stderr.write("Usage: D2 map [options] <den_dtp_dir> <index_file> <out_file>\n")
         sys.stderr.write("Options:\n")
-        sys.stderr.write("  -n Int         Bin number. default: 15.\n")
-        sys.stderr.write("  -ei Float      Density min. default: 1.\n")
-        sys.stderr.write("  -ea Float      Density max. default: 3.2.\n")
-        sys.stderr.write("  -ti Float      DisTP min. default: 1.21.\n")
-        sys.stderr.write("  -ta Float      DisTP max. default: 16.\n")
+        sys.stderr.write("  -n Int         Bin number. default: 15\n")
+        sys.stderr.write("  -ei Float      Density min. default: 1\n")
+        sys.stderr.write("  -ea Float      Density max. default: 3.2\n")
+        sys.stderr.write("  -ti Float      DisTP min. default: 1.21\n")
+        sys.stderr.write("  -ta Float      DisTP max. default: 16\n")
         return 1
     for o, a in opts:
         if o == "-n":

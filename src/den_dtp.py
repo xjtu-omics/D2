@@ -399,7 +399,7 @@ def cal_den_dtp(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 D3 [options] <3dg_file> <index_file> <output>\n")
+        sys.stderr.write("Usage: D2 D2 [options] <3dg_file> <index_file> <output>\n")
         sys.stderr.write("Options:\n")
         sys.stderr.write("  -d Bool         If is debug model. default: 0.\n")
         sys.stderr.write("  -w Bool         If write to log. default: 0.\n")
@@ -440,9 +440,16 @@ def cal_den_dtp(argv):
     points['dis_to_out'] = dis_to_out_array
     print(f'Get dis_to_out DONE.')
 
-    points.dg_df.to_csv(f'{output}.den_dtp.txt', sep="\t", index=False, header=False,
+    out_file = open(f'{output}.den_dtp.txt', 'w')
+    out_file.writelines(f"# Bin Size:{bin_size}\n")
+    out_file.close()
+
+    out_file = open(f'{output}.den_dtp.txt', 'a')
+    points.dg_df.to_csv(out_file,
+                        sep="\t", index=False, header=False,
                         columns=['chr', 'start', 'end', 'index', 'filter',
                                  'x_loc', 'y_loc', 'z_loc', 'density', 'dis_to_out'])
+    out_file.close()
     print('Save result DONE')
 
     os.system(f'mkdir -p {output}_2d_scatter')
@@ -473,7 +480,7 @@ def cal_den_dtps(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 D3s [options] <3dg_dir> <index_file> <out_dir>\n")
+        sys.stderr.write("Usage: D2 D2s [options] <3dg_dir> <index_file> <out_dir>\n")
         sys.stderr.write("Options:\n")
         sys.stderr.write("  -d INT         Debug model: 1 for yes, 0 for no. default: 0.\n")
         sys.stderr.write("  -w Bool         If write to log. default: 0.\n")
@@ -493,7 +500,7 @@ def cal_den_dtps(argv):
         dg_name = dg_file.split('/')[-1].split('.')[0]
         output = f'{out_dir}/{dg_name}'
         os.system(f'mkdir -p {output}')
-        cal_den_dtp(['D3', '-d', str(debug), '-w', str(write_log),
+        cal_den_dtp(['D2', '-d', str(debug), '-w', str(write_log),
                      dg_file, index_file, f'{output}/{dg_name}'])
 
         os.system(f'cp {output}/{dg_name}.den_dtp.txt {out_dir}/den_dtp/')

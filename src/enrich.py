@@ -43,12 +43,12 @@ def plot_value_hists(argv):
     vmax = 1.5
     title = ""
     try:
-        opts, args = getopt.getopt(argv[1:], "t:v:d:")
+        opts, args = getopt.getopt(argv[1:], "t:v:")
     except getopt.GetoptError as err:
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 enrich <hist_file> <mark_idx_file> <output>\n")
+        sys.stderr.write("Usage: D2 enrich <hist_file> <mark_idx_file> <output>\n")
         sys.stderr.write("Options:\n")
         sys.stderr.write("  -t Str         Tissue name. default: empty \n")
         sys.stderr.write("  -v Float       Vmax and Vmin. default: 1.5 \n")
@@ -90,7 +90,7 @@ def hierarchy_hist(argv):
         sys.stderr.write("[E::" + __name__ + "] unknown command\n")
         return 1
     if len(args) == 0:
-        sys.stderr.write("Usage: D3 enrich <hist_file> <mark_idx_file> <output>\n")
+        sys.stderr.write("Usage: D2 hiera <hist_file> <mark_idx_file> <output>\n")
         sys.stderr.write("Options:\n")
         sys.stderr.write("  -v Float       Vmax and Vmin. default: 2 \n")
         sys.stderr.write("  -f Flip        Either flip the ranking result. default: False \n")
@@ -123,34 +123,48 @@ def hierarchy_hist(argv):
 
     ###########################
     # rank plot
-    idx, mask_idx2hist_idx = 0, {}
-    for i in range(len(mask)):
-        if not mask[i]:
-            mask_idx2hist_idx[idx] = i
-            idx += 1
-    reorder_ind = np.array(g.dendrogram_col.reordered_ind)
-    reorder_map = np.zeros(value_hists.histmap.shape[1], dtype=int)
-    for i in range(len(reorder_ind)):
-        if flip_cluster != 0:
-            reorder_map[mask_idx2hist_idx[reorder_ind[i]]] = value_hists.histmap.shape[1] - i
-        else:
-            reorder_map[mask_idx2hist_idx[reorder_ind[i]]] = i
-    reorder_map = reorder_map.reshape(value_hists.shape)
-    ax = sns.heatmap(data=reorder_map, cmap='Spectral', mask=mask.reshape(value_hists.shape),
-                     xticklabels=value_hists.x_draw_bins, yticklabels=value_hists.y_draw_bins)
-    ax.invert_yaxis()
-    plt.ylabel('Distance to periphery')
-    plt.xlabel('DNA Density')
-
-    if output is None:
-        plt.show()
-    else:
-        save_plot_pdf(f'{output}_hierarchy_hist.pdf')
-    plt.close()
+    # idx, mask_idx2hist_idx = 0, {}
+    # for i in range(len(mask)):
+    #     if not mask[i]:
+    #         mask_idx2hist_idx[idx] = i
+    #         idx += 1
+    # reorder_ind = np.array(g.dendrogram_col.reordered_ind)
+    # reorder_map = np.zeros(value_hists.histmap.shape[1], dtype=int)
+    #
+    # # for i in range(len(reorder_ind)):
+    # #     if flip_cluster != 0:
+    # #         reorder_map[mask_idx2hist_idx[reorder_ind[i]]] = value_hists.histmap.shape[1] - i
+    # #     else:
+    # #         reorder_map[mask_idx2hist_idx[reorder_ind[i]]] = i
+    # for i in range(len(reorder_ind)):
+    #     reorder_map[mask_idx2hist_idx[reorder_ind[i]]] = i
+    #
+    # reorder_map = reorder_map.reshape(value_hists.shape)
+    # ax = sns.heatmap(data=reorder_map, cmap='Spectral', mask=mask.reshape(value_hists.shape),
+    #                  xticklabels=value_hists.x_draw_bins, yticklabels=value_hists.y_draw_bins)
+    # ax.invert_yaxis()
+    # plt.ylabel('Distance to periphery')
+    # plt.xlabel('DNA Density')
+    #
+    # if output is None:
+    #     plt.show()
+    # else:
+    #     save_plot_pdf(f'{output}_hierarchy_hist.pdf')
+    # plt.close()
 
     ###########################
     # cluster plot
-    fcluster = sch.fcluster(L, t=4, criterion="maxclust")
+    n_cluster = 4
+    fcluster = sch.fcluster(L, t=n_cluster, criterion="maxclust")
+
+    if flip_cluster:
+        new_fcluster = np.zeros_like(fcluster)
+        for i in range(n_cluster):
+            new_fcluster[fcluster == i] = n_cluster - 1 - i
+        fcluster = new_fcluster
+
+    fcluster_df = pd.DataFrame(fcluster, index=np.array(value_hists.histmap.columns)[~mask])
+    fcluster_df.to_csv(f'{output}_hierarchy_cluster_map.txt', sep="\t", header=False)
 
     fcluster_map = np.zeros(value_hists.histmap.shape[1], dtype=int)
     fcluster_map[~mask] = fcluster

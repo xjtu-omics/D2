@@ -13,7 +13,7 @@ index_names = ['chr', 'start', 'end', 'index']
 dg_names = ['chr', 'start', 'end', 'x', 'y', 'z', 'filter']
 
 den_dtp_suffix = ".den_dtp.txt"
-den_names = ['filter', 'x_loc', 'y_loc', 'z_loc', 'den', 'dtp', 'min']
+den_names = ['filter', 'x_loc', 'y_loc', 'z_loc', 'den', 'dtp']
 
 min_bin_count = 200
 
@@ -234,9 +234,19 @@ class DenDtp:
 
         # Get den_dtp
         if isinstance(input_den, str):
+            in_file = open(input_den, 'r')
+            for line in in_file.readlines():
+                if line[:10] == "# Bin Size":
+                    self.bin_size = float(line.split(":")[1])
+                else:
+                    break
+            in_file.close()
+
             den_dtp = pd.read_table(input_den,
                                     names=index_names + den_names,
-                                    dtype={'filter': float})
+                                    usecols=list(range(len(index_names + den_names))),
+                                    dtype={'filter': float},
+                                    comment="#")
             den_dtp.index = den_dtp['index']
             den_dtp = den_dtp
         elif isinstance(input_den, pd.DataFrame):
@@ -255,7 +265,8 @@ class DenDtp:
     def out_to_file(self, output):
         if isinstance(self.den_dtp, pd.DataFrame):
             self.den_dtp.to_csv(output, sep="\t", index=False, header=False,
-                                columns=index_names + den_names)
+                                columns=index_names + den_names,
+                                comment="#")
         else:
             raise ValueError(f'self.den_dtp is not pd.Dataframe type, but {self.den_dtp.type}')
 
