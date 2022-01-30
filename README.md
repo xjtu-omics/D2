@@ -59,6 +59,9 @@ Hierarchy cluster Results:
 [test_hiera_value_hierarchy.pdf](https://github.com/cyz0315/D2/files/7166779/test_hiera_value_hierarchy.pdf)
 [test_hiera_hierarchy_hist.pdf](https://github.com/cyz0315/D2/files/7166780/test_hiera_hierarchy_hist.pdf)
 
+## Gene Enrichment & activation index
+**D2.py gene** computed the fold changes of selected genomic regions (e.g., active genes) on D2 plot.
+**D2.py act** computed the activation index.
 
 # License
 D2 is free for non-commercial use by academic, government, and non-profit/not-for-profit institutions. A commercial version of the software is available and licensed through Xi’an Jiaotong University. For more information, please contact with Yizhuo che (cyz0315@stu.xjtu.edu.cn) or Kai Ye (kaiye@xjtu.edu.cn).
