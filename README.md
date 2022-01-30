@@ -60,7 +60,7 @@ Hierarchy cluster Results:
 [test_hiera_hierarchy_hist.pdf](https://github.com/cyz0315/D2/files/7166780/test_hiera_hierarchy_hist.pdf)
 
 ## Gene Enrichment & activation index
-**D2.py gene** computed the fold changes of selected genomic regions (e.g., active genes) on D2 plot.
+**D2.py gene** computed the fold changes of selected genomic regions (e.g., active genes) on D2 plot.    
 **D2.py act** computed the activation index.
 
 # License
