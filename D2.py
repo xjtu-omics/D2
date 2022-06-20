@@ -1,6 +1,10 @@
 # !/usr/bin/env python
 
+import os
 import sys
+
+cwd = os.getcwd()
+sys.path.append(cwd)
 
 
 def main():
